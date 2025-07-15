@@ -61,12 +61,12 @@ struct tftp_context {
    * @param write Flag indicating read (0) or write (!= 0) access
    * @returns File handle supplied to other functions
    */
-  void* (*open)(const char* fname, const char* mode, u8_t write);
+  __attribute__(( fptrgroup("tftp_context_open") )) void* (*open)(const char* fname, const char* mode, u8_t write);
   /**
    * Close file handle
    * @param handle File handle returned by open()/tftp_put()/tftp_get()
    */
-  void (*close)(void* handle);
+  __attribute__(( fptrgroup("tftp_context_close") )) void (*close)(void* handle);
   /**
    * Read from file
    * @param handle File handle returned by open()/tftp_put()/tftp_get()
@@ -74,7 +74,7 @@ struct tftp_context {
    * @param bytes Number of bytes to copy to buf
    * @returns &gt;= 0: Success; &lt; 0: Error
    */
-  int (*read)(void* handle, void* buf, int bytes);
+  __attribute__(( fptrgroup("tftp_context_read") )) int (*read)(void* handle, void* buf, int bytes);
   /**
    * Write to file
    * @param handle File handle returned by open()/tftp_put()/tftp_get()
@@ -83,7 +83,7 @@ struct tftp_context {
    *             TFTP headers are stripped off.
    * @returns &gt;= 0: Success; &lt; 0: Error
    */
-  int (*write)(void* handle, struct pbuf* p);
+  __attribute__(( fptrgroup("tftp_context_write") )) int (*write)(void* handle, struct pbuf* p);
   /**
    * Error indication from client or response from server
    * @param handle File handle set by open()/tftp_get()/tftp_put()
@@ -91,7 +91,7 @@ struct tftp_context {
    * @param msg error message from client or server
    * @param size size of msg
    */
-  void (*error)(void* handle, int err, const char* msg, int size);
+  __attribute__(( fptrgroup("tftp_context_error") )) void (*error)(void* handle, int err, const char* msg, int size);
 };
 
 #define LWIP_TFTP_MODE_SERVER       0x01

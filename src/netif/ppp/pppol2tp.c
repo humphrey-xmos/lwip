@@ -345,6 +345,7 @@ static void pppol2tp_disconnect(ppp_pcb *ppp, void *ctx) {
 }
 
 /* UDP Callback for incoming IPv4 L2TP frames */
+__attribute__(( fptrgroup("udp_pcb_recv") )) 
 static void pppol2tp_input(void *arg, struct udp_pcb *pcb, struct pbuf *p, const ip_addr_t *addr, u16_t port) {
   pppol2tp_pcb *l2tp = (pppol2tp_pcb*)arg;
   u16_t hflags, hlen, len=0, tunnel_id=0, session_id=0, ns=0, nr=0, offset=0;

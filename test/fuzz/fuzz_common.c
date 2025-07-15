@@ -536,7 +536,7 @@ udp_app_fuzz_input(struct udp_pcb *pcb, const ip_addr_t *addr, u16_t port)
  * udp_client_recv
  * A recv callback function (for the UDP client)
  */
-static void
+__attribute__(( fptrgroup("udp_pcb_recv") )) static void
 udp_client_recv(void *arg, struct udp_pcb *pcb, struct pbuf *p, const ip_addr_t *addr, u16_t port)
 {
   LWIP_UNUSED_ARG(arg);
@@ -560,7 +560,7 @@ udp_client_recv(void *arg, struct udp_pcb *pcb, struct pbuf *p, const ip_addr_t 
  * udp_server_recv
  * A recv callback functyion (for the UDP server)
  */
-static void
+__attribute__(( fptrgroup("udp_pcb_recv") )) static void
 udp_server_recv(void *arg, struct udp_pcb *pcb, struct pbuf *p, const ip_addr_t *addr, u16_t port)
 {
   LWIP_UNUSED_ARG(arg);

@@ -43,7 +43,7 @@
 #include "snmp_msg.h"
 
 /* lwIP UDP receive callback function */
-static void
+__attribute__(( fptrgroup("udp_pcb_recv") )) static void
 snmp_recv(void *arg, struct udp_pcb *pcb, struct pbuf *p, const ip_addr_t *addr, u16_t port)
 {
   LWIP_UNUSED_ARG(arg);

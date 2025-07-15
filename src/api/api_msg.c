@@ -214,7 +214,7 @@ recv_raw(void *arg, struct raw_pcb *pcb, struct pbuf *p,
  *
  * @see udp.h (struct udp_pcb.recv) for parameters
  */
-static void
+__attribute__(( fptrgroup("udp_pcb_recv") )) static void
 recv_udp(void *arg, struct udp_pcb *pcb, struct pbuf *p,
          const ip_addr_t *addr, u16_t port)
 {
@@ -2117,7 +2117,7 @@ done:
  * (or on timeout). A waiting application thread is waked up by
  * signaling the semaphore.
  */
-static void
+__attribute__(( fptrgroup("dns_found_callback") )) static void
 lwip_netconn_do_dns_found(const char *name, const ip_addr_t *ipaddr, void *arg)
 {
   struct dns_api_msg *msg = (struct dns_api_msg *)arg;

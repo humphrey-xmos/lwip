@@ -294,18 +294,18 @@ struct netif {
 #endif /* LWIP_IPV6 */
   /** This function is called by the network device driver
    *  to pass a packet up the TCP/IP stack. */
-  netif_input_fn input;
+  __attribute__(( fptrgroup("netif_input") )) netif_input_fn input;
 #if LWIP_IPV4
   /** This function is called by the IP module when it wants
    *  to send a packet on the interface. This function typically
    *  first resolves the hardware address, then sends the packet.
    *  For ethernet physical layer, this is usually etharp_output() */
-  netif_output_fn output;
+  __attribute__(( fptrgroup("netif_output") )) netif_output_fn output;
 #endif /* LWIP_IPV4 */
   /** This function is called by ethernet_output() when it wants
    *  to send a packet on the interface. This function outputs
    *  the pbuf as-is on the link medium. */
-  netif_linkoutput_fn linkoutput;
+  __attribute__(( fptrgroup("netif_linkoutput") )) netif_linkoutput_fn linkoutput;
 #if LWIP_IPV6
   /** This function is called by the IPv6 module when it wants
    *  to send a packet on the interface. This function typically
@@ -325,7 +325,7 @@ struct netif {
 #endif /* LWIP_NETIF_LINK_CALLBACK */
 #if LWIP_NETIF_REMOVE_CALLBACK
   /** This function is called when the netif has been removed */
-  netif_status_callback_fn remove_callback;
+  __attribute__(( fptrgroup("netif_remove") )) netif_status_callback_fn remove_callback;
 #endif /* LWIP_NETIF_REMOVE_CALLBACK */
   /** This field can be set by the device driver and could point
    *  to state information for the device. */
@@ -378,7 +378,7 @@ struct netif {
 #if LWIP_IPV4 && LWIP_IGMP
   /** This function could be called to add or delete an entry in the multicast
       filter table of the ethernet MAC.*/
-  netif_igmp_mac_filter_fn igmp_mac_filter;
+  __attribute__(( fptrgroup("igmp_mac_filter") )) netif_igmp_mac_filter_fn igmp_mac_filter;
 #endif /* LWIP_IPV4 && LWIP_IGMP */
 #if LWIP_IPV6 && LWIP_IPV6_MLD
   /** This function could be called to add or delete an entry in the IPv6 multicast

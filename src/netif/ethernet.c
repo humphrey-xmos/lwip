@@ -77,7 +77,7 @@ const struct eth_addr ethzero = {{0, 0, 0, 0, 0, 0}};
  * @see ETHARP_SUPPORT_VLAN
  * @see LWIP_HOOK_VLAN_CHECK
  */
-err_t
+__attribute__(( fptrgroup("netif_input") )) err_t
 ethernet_input(struct pbuf *p, struct netif *netif)
 {
   struct eth_hdr *ethhdr;

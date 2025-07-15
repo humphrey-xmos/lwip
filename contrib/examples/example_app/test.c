@@ -476,7 +476,7 @@ test_netif_init(void)
 }
 
 #if LWIP_DNS_APP && LWIP_DNS
-static void
+__attribute__(( fptrgroup("dns_found_callback") )) static void
 dns_found(const char *name, const ip_addr_t *addr, void *arg)
 {
   LWIP_UNUSED_ARG(arg);

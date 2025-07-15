@@ -343,7 +343,7 @@ dhcp_handle_nak(struct netif *netif)
 * @param netif   network interface to handle conflict information on
 * @param state   acd_callback_enum_t
  */
-static void
+__attribute__(( fptrgroup("acd_conflict") )) static void
 dhcp_conflict_callback(struct netif *netif, acd_callback_enum_t state)
 {
   struct dhcp *dhcp = netif_dhcp_data(netif);
@@ -1757,7 +1757,7 @@ decode_next:
 /**
  * If an incoming DHCP message is in response to us, then trigger the state machine
  */
-static void
+__attribute__(( fptrgroup("udp_pcb_recv") )) static void
 dhcp_recv(void *arg, struct udp_pcb *pcb, struct pbuf *p, const ip_addr_t *addr, u16_t port)
 {
   struct netif *netif = ip_current_input_netif();

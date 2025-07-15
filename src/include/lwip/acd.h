@@ -86,7 +86,7 @@ struct acd
   u8_t num_conflicts;
   /** callback function -> let's the acd user know if the address is good or
       if a conflict is detected */
-  acd_conflict_callback_t acd_conflict_callback;
+  __attribute__(( fptrgroup("acd_conflict") )) acd_conflict_callback_t acd_conflict_callback;
 };
 
 err_t acd_add(struct netif *netif, struct acd *acd,

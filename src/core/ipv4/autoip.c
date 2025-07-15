@@ -210,7 +210,7 @@ autoip_bind(struct netif *netif)
 * @param netif   network interface to handle conflict information on
 * @param state   acd_callback_enum_t
  */
-static void
+__attribute__(( fptrgroup("acd_conflict") )) static void
 autoip_conflict_callback(struct netif *netif, acd_callback_enum_t state)
 {
   struct autoip *autoip = netif_autoip_data(netif);
