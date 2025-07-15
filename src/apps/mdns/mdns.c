@@ -2075,7 +2075,7 @@ mdns_handle_response(struct mdns_packet *pkt, struct netif *netif)
  * Receive input function for MDNS packets.
  * Handles both IPv4 and IPv6 UDP pcbs.
  */
-static void
+__attribute__(( fptrgroup("udp_pcb_recv") )) static void
 mdns_recv(void *arg, struct udp_pcb *pcb, struct pbuf *p, const ip_addr_t *addr, u16_t port)
 {
   struct dns_hdr hdr;

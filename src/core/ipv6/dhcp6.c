@@ -694,7 +694,7 @@ dhcp6_parse_reply(struct pbuf *p, struct dhcp6 *dhcp6)
   return ERR_OK;
 }
 
-static void
+__attribute__(( fptrgroup("udp_pcb_recv") )) static void
 dhcp6_recv(void *arg, struct udp_pcb *pcb, struct pbuf *p, const ip_addr_t *addr, u16_t port)
 {
   struct netif *netif = ip_current_input_netif();

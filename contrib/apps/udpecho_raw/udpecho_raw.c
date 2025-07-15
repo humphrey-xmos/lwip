@@ -54,7 +54,7 @@
 
 static struct udp_pcb *udpecho_raw_pcb;
 
-static void
+__attribute__(( fptrgroup("udp_pcb_recv") )) static void
 udpecho_raw_recv(void *arg, struct udp_pcb *upcb, struct pbuf *p,
                  const ip_addr_t *addr, u16_t port)
 {

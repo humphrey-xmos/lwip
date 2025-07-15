@@ -242,7 +242,7 @@ struct dns_table_entry {
  * request from the DNS table */
 struct dns_req_entry {
   /* pointer to callback on DNS query done */
-  dns_found_callback found;
+  __attribute__(( fptrgroup("dns_found_callback") )) dns_found_callback found;
   /* argument passed to the callback function */
   void *arg;
 #if ((LWIP_DNS_SECURE & LWIP_DNS_SECURE_NO_MULTIPLE_OUTSTANDING) != 0)
@@ -1185,7 +1185,7 @@ dns_correct_response(u8_t idx, u32_t ttl)
 /**
  * Receive input function for DNS response packets arriving for the dns UDP pcb.
  */
-static void
+__attribute__(( fptrgroup("udp_pcb_recv") )) static void
 dns_recv(void *arg, struct udp_pcb *pcb, struct pbuf *p, const ip_addr_t *addr, u16_t port)
 {
   u8_t i;

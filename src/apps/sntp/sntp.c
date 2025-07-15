@@ -453,7 +453,7 @@ sntp_kod_try_next_server(void *arg)
 #endif /* SNTP_SUPPORT_MULTIPLE_SERVERS */
 
 /** UDP recv callback for the sntp pcb */
-static void
+__attribute__(( fptrgroup("udp_pcb_recv") )) static void
 sntp_recv(void *arg, struct udp_pcb *pcb, struct pbuf *p, const ip_addr_t *addr, u16_t port)
 {
   struct sntp_timestamps timestamps;
@@ -598,7 +598,7 @@ sntp_send_request(const ip_addr_t *server_addr)
 /**
  * DNS found callback when using DNS names as server address.
  */
-static void
+__attribute__(( fptrgroup("dns_found_callback") )) static void
 sntp_dns_found(const char *hostname, const ip_addr_t *ipaddr, void *arg)
 {
   LWIP_UNUSED_ARG(hostname);

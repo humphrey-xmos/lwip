@@ -224,7 +224,7 @@ netif_init(void)
  * Only works if the netif driver correctly sets
  * NETIF_FLAG_ETHARP and/or NETIF_FLAG_ETHERNET flag!
  */
-err_t
+__attribute__(( fptrgroup("netif_input") )) err_t
 netif_input(struct pbuf *p, struct netif *inp)
 {
   LWIP_ASSERT_CORE_LOCKED();
@@ -288,7 +288,7 @@ netif_add(struct netif *netif,
 #if LWIP_IPV4
           const ip4_addr_t *ipaddr, const ip4_addr_t *netmask, const ip4_addr_t *gw,
 #endif /* LWIP_IPV4 */
-          void *state, netif_init_fn init, netif_input_fn input)
+          void *state, __attribute__(( fptrgroup("net_add_init") )) netif_init_fn init, netif_input_fn input)
 {
 #if LWIP_IPV6
   s8_t i;

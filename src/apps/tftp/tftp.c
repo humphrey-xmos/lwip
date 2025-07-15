@@ -239,7 +239,7 @@ send_data(const ip_addr_t *addr, u16_t port)
   resend_data(addr, port);
 }
 
-static void
+__attribute__(( fptrgroup("udp_pcb_recv") )) static void
 tftp_recv(void *arg, struct udp_pcb *upcb, struct pbuf *p, const ip_addr_t *addr, u16_t port)
 {
   u16_t *sbuf = (u16_t *) p->payload;
