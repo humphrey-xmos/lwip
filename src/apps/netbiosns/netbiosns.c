@@ -266,7 +266,7 @@ netbiosns_name_decode(const char *name_enc, char *name_dec, int name_dec_len)
       return -1;
     }
     cname -= 'A';
-    cnbname = cname << 4;
+    cnbname = (char)(cname << 4);
     pname++;
 
     cname = *pname;

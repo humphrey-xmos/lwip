@@ -279,7 +279,7 @@ static const char *
 sntp_format_time(s32_t sec)
 {
   time_t ut;
-  ut = (u32_t)((u32_t)sec + DIFF_SEC_1970_2036);
+  ut = (time_t)((u32_t)sec + DIFF_SEC_1970_2036);
   return ctime(&ut);
 }
 #endif /* LWIP_DEBUG && !sntp_format_time */
@@ -328,7 +328,7 @@ sntp_process(const struct sntp_timestamps *timestamps)
   }
 #endif /* SNTP_COMP_ROUNDTRIP */
 
-  SNTP_SET_SYSTEM_TIME_NTP(sec, frac);
+  SNTP_SET_SYSTEM_TIME_NTP((u32_t)sec, frac);
   LWIP_UNUSED_ARG(frac); /* might be unused if only seconds are set */
   LWIP_DEBUGF(SNTP_DEBUG_TRACE, ("sntp_process: %s, %" U32_F " us\n",
                                  sntp_format_time(sec), SNTP_FRAC_TO_US(frac)));
