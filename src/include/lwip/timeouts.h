@@ -81,14 +81,14 @@ extern const struct lwip_cyclic_timer lwip_cyclic_timers[];
 /** Array size of lwip_cyclic_timers[] */
 extern const int lwip_num_cyclic_timers;
 
-#if LWIP_TIMERS
-
 /** Function prototype for a timeout callback function. Register such a function
  * using sys_timeout().
  *
  * @param arg Additional argument to pass to the function - set up by sys_timeout()
  */
 typedef void (* sys_timeout_handler)(void *arg);
+
+#if LWIP_TIMERS
 
 struct sys_timeo {
   struct sys_timeo *next;
@@ -102,13 +102,6 @@ struct sys_timeo {
 
 void sys_timeouts_init(void);
 
-#if LWIP_DEBUG_TIMERNAMES
-void sys_timeout_debug(u32_t msecs, sys_timeout_handler handler, void *arg, const char* handler_name);
-#define sys_timeout(msecs, handler, arg) sys_timeout_debug(msecs, handler, arg, #handler)
-#else /* LWIP_DEBUG_TIMERNAMES */
-void sys_timeout(u32_t msecs, sys_timeout_handler handler, void *arg);
-#endif /* LWIP_DEBUG_TIMERNAMES */
-
 void sys_untimeout(sys_timeout_handler handler, void *arg);
 void sys_restart_timeouts(void);
 void sys_check_timeouts(void);
@@ -120,6 +113,13 @@ void lwip_cyclic_timer(void *arg);
 #endif
 
 #endif /* LWIP_TIMERS */
+
+#if LWIP_DEBUG_TIMERNAMES
+void sys_timeout_debug(u32_t msecs, sys_timeout_handler handler, void *arg, const char* handler_name);
+#define sys_timeout(msecs, handler, arg) sys_timeout_debug(msecs, handler, arg, #handler)
+#else /* LWIP_DEBUG_TIMERNAMES */
+void sys_timeout(u32_t msecs, sys_timeout_handler handler, void *arg);
+#endif /* LWIP_DEBUG_TIMERNAMES */
 
 #ifdef __cplusplus
 }
