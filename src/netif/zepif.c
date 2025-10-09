@@ -94,7 +94,7 @@ struct zepif_state {
 static u8_t zep_lowpan_timer_running;
 
 /* Helper function that calls the 6LoWPAN timer and reschedules itself */
-static void
+__attribute__(( fptrgroup("sys_timeout_handler") )) static void
 zep_lowpan_timer(void *arg)
 {
   lowpan6_tmr();

@@ -970,7 +970,7 @@ lenerr_drop_free_return:
  * - Perform duplicate address detection (DAD) for our addresses
  * - Send router solicitations
  */
-void
+__attribute__(( fptrgroup("lwip_cyclic_timer") )) void
 nd6_tmr(void)
 {
   s8_t i;

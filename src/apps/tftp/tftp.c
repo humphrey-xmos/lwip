@@ -413,7 +413,7 @@ tftp_recv(void *arg, struct udp_pcb *upcb, struct pbuf *p, const ip_addr_t *addr
   pbuf_free(p);
 }
 
-static void
+__attribute__(( fptrgroup("sys_timeout_handler") )) static void
 tftp_tmr(void *arg)
 {
   LWIP_UNUSED_ARG(arg);

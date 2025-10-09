@@ -230,7 +230,7 @@ tcp_free_listen(struct tcp_pcb *pcb)
 /**
  * Called periodically to dispatch TCP timers.
  */
-void
+__attribute__(( fptrgroup("lwip_cyclic_timer") )) void
 tcp_tmr(void)
 {
   /* Call tcp_fasttmr() every 250 ms */

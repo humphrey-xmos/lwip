@@ -367,7 +367,7 @@ sntp_initialize_request(struct sntp_msg *req)
  *
  * @param arg is unused (only necessary to conform to sys_timeout)
  */
-static void
+__attribute__(( fptrgroup("sys_timeout_handler") )) static void
 sntp_retry(void *arg)
 {
   LWIP_UNUSED_ARG(arg);
@@ -404,7 +404,7 @@ sntp_retry(void *arg)
  *
  * @param arg is unused (only necessary to conform to sys_timeout)
  */
-static void
+__attribute__(( fptrgroup("sys_timeout_handler") )) static void
 sntp_try_next_server(void *arg)
 {
   u8_t old_server, i;
@@ -622,7 +622,7 @@ sntp_dns_found(const char *hostname, const ip_addr_t *ipaddr, void *arg)
  *
  * @param arg is unused (only necessary to conform to sys_timeout)
  */
-static void
+__attribute__(( fptrgroup("sys_timeout_handler") )) static void
 sntp_request(void *arg)
 {
   ip_addr_t sntp_server_address;

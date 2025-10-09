@@ -194,7 +194,7 @@ etharp_free_entry(int i)
  * This function should be called every ARP_TMR_INTERVAL milliseconds (1 second),
  * in order to expire entries in the ARP table.
  */
-void
+__attribute__(( fptrgroup("lwip_cyclic_timer") )) void
 etharp_tmr(void)
 {
   int i;

@@ -746,7 +746,7 @@ packet_too_short:
 }
 
 /* L2TP Timeout handler */
-static void pppol2tp_timeout(void *arg) {
+__attribute__(( fptrgroup("sys_timeout_handler") )) static void pppol2tp_timeout(void *arg) {
   pppol2tp_pcb *l2tp = (pppol2tp_pcb*)arg;
   err_t err;
   u32_t retry_wait;

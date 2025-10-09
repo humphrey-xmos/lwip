@@ -456,7 +456,7 @@ fail:
 /*** LOCAL FUNCTION DEFINITIONS ***/
 /**********************************/
 
-static void ppp_do_connect(void *arg) {
+__attribute__(( fptrgroup("sys_timeout_handler") )) static void ppp_do_connect(void *arg) {
   ppp_pcb *pcb = (ppp_pcb*)arg;
 
   LWIP_ASSERT("pcb->phase == PPP_PHASE_DEAD || pcb->phase == PPP_PHASE_HOLDOFF", pcb->phase == PPP_PHASE_DEAD || pcb->phase == PPP_PHASE_HOLDOFF);

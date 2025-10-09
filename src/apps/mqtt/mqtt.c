@@ -572,7 +572,7 @@ mqtt_close(mqtt_client_t *client, mqtt_connection_status_t reason)
  * Interval timer, called every MQTT_CYCLIC_TIMER_INTERVAL seconds in MQTT_CONNECTING and MQTT_CONNECTED states
  * @param arg MQTT client
  */
-static void
+__attribute__(( fptrgroup("sys_timeout_handler") )) static void
 mqtt_cyclic_timer(void *arg)
 {
   u8_t restart_timer = 1;

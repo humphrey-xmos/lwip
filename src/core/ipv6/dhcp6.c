@@ -795,7 +795,7 @@ dhcp6_timeout(struct netif *netif, struct dhcp6 *dhcp6)
  * A DHCPv6 server is expected to respond within a short period of time.
  * This timer checks whether an outstanding DHCPv6 request is timed out.
  */
-void
+__attribute__(( fptrgroup("lwip_cyclic_timer") )) void
 dhcp6_tmr(void)
 {
   struct netif *netif;

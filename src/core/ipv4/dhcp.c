@@ -506,7 +506,7 @@ dhcp_select(struct netif *netif)
  * The DHCP timer that checks for lease renewal/rebind timeouts.
  * Must be called once a minute (see @ref DHCP_COARSE_TIMER_SECS).
  */
-void
+__attribute__(( fptrgroup("lwip_cyclic_timer") )) void
 dhcp_coarse_tmr(void)
 {
   struct netif *netif;
@@ -544,7 +544,7 @@ dhcp_coarse_tmr(void)
  * A DHCP server is expected to respond within a short period of time.
  * This timer checks whether an outstanding DHCP request is timed out.
  */
-void
+__attribute__(( fptrgroup("lwip_cyclic_timer") )) void
 dhcp_fine_tmr(void)
 {
   struct netif *netif;

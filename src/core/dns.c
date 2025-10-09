@@ -391,7 +391,7 @@ dns_getserver(u8_t numdns)
  * The DNS resolver client timer - handle retries and timeouts and should
  * be called every DNS_TMR_INTERVAL milliseconds (every second by default).
  */
-void
+__attribute__(( fptrgroup("lwip_cyclic_timer") )) void
 dns_tmr(void)
 {
   LWIP_DEBUGF(DNS_DEBUG, ("dns_tmr: dns_check_entries\n"));

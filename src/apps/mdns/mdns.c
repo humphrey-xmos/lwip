@@ -1699,7 +1699,7 @@ mdns_handle_question(struct mdns_packet *pkt, struct netif *netif)
  *
  * @param arg   incoming packet (in pool)
  */
-static void
+__attribute__(( fptrgroup("sys_timeout_handler") )) static void
 mdns_handle_tc_question(void *arg)
 {
   struct mdns_packet *pkt = (struct mdns_packet *)arg;
@@ -2282,7 +2282,7 @@ mdns_send_probe(struct netif* netif, const ip_addr_t *destination)
 /**
  * Timer callback for probing and announcing on the network.
  */
-static void
+__attribute__(( fptrgroup("sys_timeout_handler") )) static void
 mdns_probe_and_announce(void* arg)
 {
   struct netif *netif = (struct netif *)arg;

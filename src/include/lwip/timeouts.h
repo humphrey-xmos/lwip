@@ -69,7 +69,7 @@ typedef void (* lwip_cyclic_timer_handler)(void);
  that has to be called at a defined interval */
 struct lwip_cyclic_timer {
   u32_t interval_ms;
-  lwip_cyclic_timer_handler handler;
+  __attribute__(( fptrgroup("lwip_cyclic_timer") )) lwip_cyclic_timer_handler handler;
 #if LWIP_DEBUG_TIMERNAMES
   const char* handler_name;
 #endif /* LWIP_DEBUG_TIMERNAMES */

@@ -140,7 +140,7 @@ static int tcpip_tcp_timer_active;
  *
  * @param arg unused argument
  */
-static void
+__attribute__(( fptrgroup("sys_timeout_handler") )) static void
 tcpip_tcp_timer(void *arg)
 {
   LWIP_UNUSED_ARG(arg);
@@ -225,6 +225,7 @@ sys_timeout_abs(u32_t abs_time, sys_timeout_handler handler, void *arg)
  *
  * @param arg unused argument
  */
+__attribute__(( fptrgroup("sys_timeout_handler") ))
 #if !LWIP_TESTMODE
 static
 #endif
@@ -360,7 +361,7 @@ sys_check_timeouts(void)
 
   do {
     struct sys_timeo *tmptimeout;
-    sys_timeout_handler handler;
+    __attribute__(( fptrgroup("sys_timeout_handler") )) sys_timeout_handler handler;
     void *arg;
 
     PBUF_CHECK_FREE_OOSEQ();

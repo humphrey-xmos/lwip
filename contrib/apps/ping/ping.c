@@ -351,7 +351,7 @@ ping_send(struct raw_pcb *raw, const ip_addr_t *addr)
   pbuf_free(p);
 }
 
-static void
+__attribute__(( fptrgroup("sys_timeout_handler") )) static void
 ping_timeout(void *arg)
 {
   struct raw_pcb *pcb = (struct raw_pcb*)arg;
@@ -363,7 +363,7 @@ ping_timeout(void *arg)
   sys_timeout(PING_DELAY, ping_timeout, pcb);
 }
 
-static void
+__attribute__(( fptrgroup("sys_timeout_handler") )) static void
 ping_raw_init(void)
 {
   ping_pcb = raw_new(IP_PROTO_ICMP);
