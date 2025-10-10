@@ -6,6 +6,7 @@
 #include "netif/configure.h"
 #include "debug_print.h"
 #include "xassert.h"
+#include "xtcp.h"
 
 #include "lwip/def.h"
 #include "lwip/dhcp.h"
@@ -29,7 +30,7 @@
 // TODO - will need to be per-interface if we support multiple interfaces
 static struct netif xcore_netif;
 
-/* Define those to better describe your network interface. */
+/* Network interface short description. */
 #define IFNAME0 'x'
 #define IFNAME1 'm'
 
@@ -81,7 +82,7 @@ int xcore_ethernetif_init(const uint8_t* mac_address_phy, const xtcp_ipconfig_t*
 __attribute__((fptrgroup("net_add_init"))) static err_t ethernetif_init(struct netif *netif) {
 #if LWIP_NETIF_HOSTNAME
   /* Initialize interface hostname */
-  netif->hostname = "lwip-xcore";
+  netif->hostname = XTCP_HOSTNAME;
 #endif /* LWIP_NETIF_HOSTNAME */
 
   /*

@@ -31,6 +31,7 @@
 
 #define LWIP_DNS                    1
 #define DNS_MAX_NAME_LENGTH         256
+#define LWIP_NETIF_HOSTNAME         0
 
 /* ---------- TCP options ---------- */
 #define TCP_MSS                     536  // Default is 536

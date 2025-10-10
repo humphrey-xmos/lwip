@@ -21,9 +21,6 @@
 u32_t sys_now(void)
 {
   // TODO - implement ms timer value for returning, this is currently not needed, as NO_SYS_NO_TIMERS=1
-  // static uint32_t ms;
-  // uint32_t now = get_reference_time();
-  // return now / XS1_TIMER_KHZ;
 }
 
 #else /* LWIP_TIMERS && !LWIP_TIMERS_CUSTOM */

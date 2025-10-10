@@ -1,8 +1,8 @@
 // Copyright 2025 XMOS LIMITED.
 // This Software is subject to the terms of the XMOS Public Licence: Version 1.
 
-#ifndef __ARCH_CC_H__
-#define __ARCH_CC_H__
+#ifndef ARCH_CC_H
+#define ARCH_CC_H
 
 #include <stdint.h>
 #include <stdio.h>
@@ -29,8 +29,7 @@
 #define LWIP_PLATFORM_ASSERT(x)                                               \
   do {                                                                        \
     debug_printf("Assert \"%s\" failed at line %d in %s\n", x, __LINE__, __FILE__); \
-    while (1) {                                                               \
-    };                                                                        \
+    __builtin_trap();                                                         \
   } while (0)
 
 extern random_generator_t rng;
