@@ -694,7 +694,7 @@ dhcp6_parse_reply(struct pbuf *p, struct dhcp6 *dhcp6)
   return ERR_OK;
 }
 
-static void
+__attribute__(( fptrgroup("udp_pcb_recv") )) static void
 dhcp6_recv(void *arg, struct udp_pcb *pcb, struct pbuf *p, const ip_addr_t *addr, u16_t port)
 {
   struct netif *netif = ip_current_input_netif();
@@ -795,7 +795,7 @@ dhcp6_timeout(struct netif *netif, struct dhcp6 *dhcp6)
  * A DHCPv6 server is expected to respond within a short period of time.
  * This timer checks whether an outstanding DHCPv6 request is timed out.
  */
-void
+__attribute__(( fptrgroup("lwip_cyclic_timer") )) void
 dhcp6_tmr(void)
 {
   struct netif *netif;

@@ -109,7 +109,7 @@ static void ip6_reass_free_complete_datagram(struct ip6_reassdata *ipr);
 static void ip6_reass_remove_oldest_datagram(struct ip6_reassdata *ipr, int pbufs_needed);
 #endif /* IP_REASS_FREE_OLDEST */
 
-void
+__attribute__(( fptrgroup("lwip_cyclic_timer") )) void
 ip6_reass_tmr(void)
 {
   struct ip6_reassdata *r, *tmp;

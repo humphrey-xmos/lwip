@@ -492,7 +492,7 @@ mld6_leavegroup_netif(struct netif *netif, const ip6_addr_t *groupaddr)
  *
  * When a delaying member expires, a membership report is sent.
  */
-void
+__attribute__(( fptrgroup("lwip_cyclic_timer") )) void
 mld6_tmr(void)
 {
   struct netif *netif;

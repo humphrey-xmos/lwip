@@ -444,7 +444,7 @@ httpc_get_internal_addr(httpc_state_t* req, const ip_addr_t *ipaddr)
 /** DNS callback
  * If ipaddr is non-NULL, resolving succeeded and the request can be sent, otherwise it failed.
  */
-static void
+__attribute__(( fptrgroup("dns_found_callback") )) static void
 httpc_dns_found(const char* hostname, const ip_addr_t *ipaddr, void *arg)
 {
   httpc_state_t* req = (httpc_state_t*)arg;

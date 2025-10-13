@@ -831,7 +831,7 @@ pppoe_send_padi(struct pppoe_softc *sc)
   return pppoe_output(sc, pb);
 }
 
-static void
+__attribute__(( fptrgroup("sys_timeout_handler") )) static void
 pppoe_timeout(void *arg)
 {
   u32_t retry_wait;

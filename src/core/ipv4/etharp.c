@@ -194,7 +194,7 @@ etharp_free_entry(int i)
  * This function should be called every ARP_TMR_INTERVAL milliseconds (1 second),
  * in order to expire entries in the ARP table.
  */
-void
+__attribute__(( fptrgroup("lwip_cyclic_timer") )) void
 etharp_tmr(void)
 {
   int i;
@@ -788,7 +788,7 @@ etharp_output_to_arp_index(struct netif *netif, struct pbuf *q, netif_addr_idx_t
  * - ERR_RTE No route to destination (no gateway to external networks),
  * or the return type of either etharp_query() or ethernet_output().
  */
-err_t
+__attribute__(( fptrgroup("netif_output") )) err_t
 etharp_output(struct netif *netif, struct pbuf *q, const ip4_addr_t *ipaddr)
 {
   const struct eth_addr *dest;

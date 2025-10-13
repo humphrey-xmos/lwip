@@ -176,7 +176,7 @@ bridgeif_fdb_age_one_second(void *fdb_ptr)
 }
 
 /** Timer callback for fdb aging, called once per second */
-static void
+__attribute__(( fptrgroup("sys_timeout_handler") )) static void
 bridgeif_age_tmr(void *arg)
 {
   bridgeif_dfdb_t *fdb = (bridgeif_dfdb_t *)arg;

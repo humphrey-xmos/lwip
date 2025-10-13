@@ -230,7 +230,7 @@ tcp_free_listen(struct tcp_pcb *pcb)
 /**
  * Called periodically to dispatch TCP timers.
  */
-void
+__attribute__(( fptrgroup("lwip_cyclic_timer") )) void
 tcp_tmr(void)
 {
   /* Call tcp_fasttmr() every 250 ms */
@@ -1003,7 +1003,7 @@ tcp_recved(struct tcp_pcb *pcb, u16_t len)
   }
 
   LWIP_DEBUGF(TCP_DEBUG, ("tcp_recved: received %"U16_F" bytes, wnd %"TCPWNDSIZE_F" (%"TCPWNDSIZE_F").\n",
-                          len, pcb->rcv_wnd, (u16_t)(TCP_WND_MAX(pcb) - pcb->rcv_wnd)));
+                          len, pcb->rcv_wnd, (tcpwnd_size_t)(TCP_WND_MAX(pcb) - pcb->rcv_wnd)));
 }
 
 /**
@@ -1638,7 +1638,7 @@ tcp_seg_free(struct tcp_seg *seg)
 }
 
 /**
- * @ingroup tcp
+ * @ingroup tcp_raw
  * Sets the priority of a connection.
  *
  * @param pcb the tcp_pcb to manipulate

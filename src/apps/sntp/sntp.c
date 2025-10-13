@@ -279,7 +279,7 @@ static const char *
 sntp_format_time(s32_t sec)
 {
   time_t ut;
-  ut = (u32_t)((u32_t)sec + DIFF_SEC_1970_2036);
+  ut = (time_t)((u32_t)sec + DIFF_SEC_1970_2036);
   return ctime(&ut);
 }
 #endif /* LWIP_DEBUG && !sntp_format_time */
@@ -328,7 +328,7 @@ sntp_process(const struct sntp_timestamps *timestamps)
   }
 #endif /* SNTP_COMP_ROUNDTRIP */
 
-  SNTP_SET_SYSTEM_TIME_NTP(sec, frac);
+  SNTP_SET_SYSTEM_TIME_NTP((u32_t)sec, frac);
   LWIP_UNUSED_ARG(frac); /* might be unused if only seconds are set */
   LWIP_DEBUGF(SNTP_DEBUG_TRACE, ("sntp_process: %s, %" U32_F " us\n",
                                  sntp_format_time(sec), SNTP_FRAC_TO_US(frac)));
@@ -367,7 +367,7 @@ sntp_initialize_request(struct sntp_msg *req)
  *
  * @param arg is unused (only necessary to conform to sys_timeout)
  */
-static void
+__attribute__(( fptrgroup("sys_timeout_handler") )) static void
 sntp_retry(void *arg)
 {
   LWIP_UNUSED_ARG(arg);
@@ -404,7 +404,7 @@ sntp_retry(void *arg)
  *
  * @param arg is unused (only necessary to conform to sys_timeout)
  */
-static void
+__attribute__(( fptrgroup("sys_timeout_handler") )) static void
 sntp_try_next_server(void *arg)
 {
   u8_t old_server, i;
@@ -453,7 +453,7 @@ sntp_kod_try_next_server(void *arg)
 #endif /* SNTP_SUPPORT_MULTIPLE_SERVERS */
 
 /** UDP recv callback for the sntp pcb */
-static void
+__attribute__(( fptrgroup("udp_pcb_recv") )) static void
 sntp_recv(void *arg, struct udp_pcb *pcb, struct pbuf *p, const ip_addr_t *addr, u16_t port)
 {
   struct sntp_timestamps timestamps;
@@ -598,7 +598,7 @@ sntp_send_request(const ip_addr_t *server_addr)
 /**
  * DNS found callback when using DNS names as server address.
  */
-static void
+__attribute__(( fptrgroup("dns_found_callback") )) static void
 sntp_dns_found(const char *hostname, const ip_addr_t *ipaddr, void *arg)
 {
   LWIP_UNUSED_ARG(hostname);
@@ -622,7 +622,7 @@ sntp_dns_found(const char *hostname, const ip_addr_t *ipaddr, void *arg)
  *
  * @param arg is unused (only necessary to conform to sys_timeout)
  */
-static void
+__attribute__(( fptrgroup("sys_timeout_handler") )) static void
 sntp_request(void *arg)
 {
   ip_addr_t sntp_server_address;

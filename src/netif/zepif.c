@@ -94,7 +94,7 @@ struct zepif_state {
 static u8_t zep_lowpan_timer_running;
 
 /* Helper function that calls the 6LoWPAN timer and reschedules itself */
-static void
+__attribute__(( fptrgroup("sys_timeout_handler") )) static void
 zep_lowpan_timer(void *arg)
 {
   lowpan6_tmr();
@@ -104,7 +104,7 @@ zep_lowpan_timer(void *arg)
 }
 
 /* Pass received pbufs into 6LowPAN netif */
-static void
+__attribute__(( fptrgroup("udp_pcb_recv") )) static void
 zepif_udp_recv(void *arg, struct udp_pcb *pcb, struct pbuf *p,
                const ip_addr_t *addr, u16_t port)
 {

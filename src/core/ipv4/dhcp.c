@@ -343,7 +343,7 @@ dhcp_handle_nak(struct netif *netif)
 * @param netif   network interface to handle conflict information on
 * @param state   acd_callback_enum_t
  */
-static void
+__attribute__(( fptrgroup("acd_conflict") )) static void
 dhcp_conflict_callback(struct netif *netif, acd_callback_enum_t state)
 {
   struct dhcp *dhcp = netif_dhcp_data(netif);
@@ -506,7 +506,7 @@ dhcp_select(struct netif *netif)
  * The DHCP timer that checks for lease renewal/rebind timeouts.
  * Must be called once a minute (see @ref DHCP_COARSE_TIMER_SECS).
  */
-void
+__attribute__(( fptrgroup("lwip_cyclic_timer") )) void
 dhcp_coarse_tmr(void)
 {
   struct netif *netif;
@@ -544,7 +544,7 @@ dhcp_coarse_tmr(void)
  * A DHCP server is expected to respond within a short period of time.
  * This timer checks whether an outstanding DHCP request is timed out.
  */
-void
+__attribute__(( fptrgroup("lwip_cyclic_timer") )) void
 dhcp_fine_tmr(void)
 {
   struct netif *netif;
@@ -1758,7 +1758,7 @@ decode_next:
 /**
  * If an incoming DHCP message is in response to us, then trigger the state machine
  */
-static void
+__attribute__(( fptrgroup("udp_pcb_recv") )) static void
 dhcp_recv(void *arg, struct udp_pcb *pcb, struct pbuf *p, const ip_addr_t *addr, u16_t port)
 {
   struct netif *netif = ip_current_input_netif();

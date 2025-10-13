@@ -236,7 +236,7 @@ acd_network_changed_link_down(struct netif *netif)
 /**
  * Has to be called in loop every ACD_TMR_INTERVAL milliseconds
  */
-void
+__attribute__(( fptrgroup("lwip_cyclic_timer") )) void
 acd_tmr(void)
 {
   struct netif *netif;

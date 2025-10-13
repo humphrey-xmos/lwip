@@ -809,7 +809,7 @@ cleanup:
  *
  *  @param arg  pointer to netif of timeout.
  */
-void
+__attribute__(( fptrgroup("sys_timeout_handler") )) void
 mdns_multicast_timeout_reset_ipv4(void *arg)
 {
   struct netif *netif = (struct netif*)arg;
@@ -826,7 +826,7 @@ mdns_multicast_timeout_reset_ipv4(void *arg)
  *
  *  @param arg  pointer to netif of timeout.
  */
-void
+__attribute__(( fptrgroup("sys_timeout_handler") )) void
 mdns_multicast_probe_timeout_reset_ipv4(void *arg)
 {
   struct netif *netif = (struct netif*)arg;
@@ -857,7 +857,7 @@ mdns_multicast_probe_timeout_reset_ipv4(void *arg)
  *
  *  @param arg  pointer to netif of timeout.
  */
-void
+__attribute__(( fptrgroup("sys_timeout_handler") )) void
 mdns_multicast_timeout_25ttl_reset_ipv4(void *arg)
 {
   struct netif *netif = (struct netif*)arg;
