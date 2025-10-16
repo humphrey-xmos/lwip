@@ -454,12 +454,10 @@ tftp_init_common(u8_t mode, const struct tftp_context *ctx)
     return ERR_MEM;
   }
 
-  if (mode & LWIP_TFTP_MODE_SERVER) {
-    ret = udp_bind(pcb, IP_ANY_TYPE, TFTP_PORT);
-    if (ret != ERR_OK) {
-      udp_remove(pcb);
-      return ret;
-    }
+  ret = udp_bind(pcb, IP_ANY_TYPE, TFTP_PORT);
+  if (ret != ERR_OK) {
+    udp_remove(pcb);
+    return ret;
   }
 
   tftp_state.handle    = NULL;
